@@ -39,9 +39,9 @@ export class AuthService {
     return localStorage.getItem('del_meetups_auth_token');
   }
 
-  login(email: string, password: string) {
+  login(email: string, password: string, fio: string) {
     return this.http
-      .post<{ token: string }>(`${this.baseUrl}/login`, { email, password })
+      .post<{ token: string }>(`${this.baseUrl}/login`, { email, password, fio })
       .pipe(
         map((res) => {
           if (res.token) {
