@@ -39,14 +39,14 @@ export class AuthService {
     return localStorage.getItem('del_meetups_auth_token');
   }
 
-  login(email: string, password: string, fio: string) {
+  login(email: string, password: string) {
     return this.http
-      .post<{ token: string }>(`${this.baseUrl}/login`, { email, password, fio })
+      .post<{ token: string }>(`${this.baseUrl}/login`, { email, password})
       .pipe(
         map((res) => {
           if (res.token) {
             localStorage.setItem('del_meetups_auth_token', res.token);
-            this.routes.navigate(['list']);
+            this.routes.navigate(['meetups']);
           }
           return null;
         })
@@ -55,6 +55,6 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem('del_meetups_auth_token');
-    this.routes.navigate(['']);
+    this.routes.navigate(['auth']);
   }
 }

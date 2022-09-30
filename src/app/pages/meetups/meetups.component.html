@@ -1,1 +1,5 @@
-<ul *ngFor="let meetup of meetupsService.meetups">
+<ul *ngFor="let meetup of nMeetups">
+    <li>
+        <app-meetup-card [newMeetup]="meetup"> </app-meetup-card>
+    </li>
+</ul>

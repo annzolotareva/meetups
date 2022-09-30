@@ -1,28 +1,27 @@
 <div class="meetup-card">
-    <h3 class="meetup-card__name"></h3>
+    <h3 class="meetup-card__name">{{newMeetup.name}}</h3>
     <p class="meetup-card__count-of-follower"> подписчик</p>
-    <div class="meetup-card__data-place data-place">
-        <p class="data-place__date"></p>
-        <p class="data-place__place"></p>
+    <div class="meetup-card__time-location time-location">
+        <p class="data-place__time">{{newMeetup.time}}</p>
+        <p class="data-place__location">{{newMeetup.location}}</p>
     </div>
     <div class="meetup-card__body">
-        <p class="meetup-card__short-description"></p>
-        <p class="meetup-card__full-description"></p>
+        <p class="meetup-card__description">{{newMeetup.description}}</p>
         <div class="meetup-card__target-group target-group">
             <h4 class="target-group__title">Целевая аудитория</h4>
-            <p class="target-group__description"></p>
+            <p class="target-group__description">{{newMeetup.target_audience}}</p>
         </div>
         <div class="meetup-card__need-to-know need-to-know">
             <h4 class="need-to-know__title">Что нужно знать</h4>
-            <p class="need-to-know__description"></p>
+            <p class="need-to-know__description">{{newMeetup.need_to_know}}</p>
         </div>
         <div class="meetup-card__meetup-plan meetup-plan">
             <h4 class="meetup-plan__title">Что будет</h4>
-            <p class="meetup-plan__description"></p>
+            <p class="meetup-plan__description">{{newMeetup.will_happen}}</p>
         </div>
         <div class="meetup-card__necessity necessity">
             <h4 class="necessity__title">Почему надо обязательно прийти</h4>
-            <p class="necessity__description"></p>
+            <p class="necessity__description">{{newMeetup.reason_to_come}}</p>
         </div>
     </div>
 </div>

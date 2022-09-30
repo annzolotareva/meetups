@@ -1,3 +1,5 @@
+import { IUser } from "../user/user.component";
+
 export interface IMeetup {
   id: number;
   name: string;
@@ -9,5 +11,8 @@ export interface IMeetup {
   reason_to_come: string;
   time: string;
   duration: number;
-  createdBy: number, 
+  createdBy: number;
+  owner: IUser;
+  users: Array<IUser>;
+
 }

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { IMeetup } from 'src/app/entities/meetup/meetup.component';
 
 @Component({
   selector: 'app-meetup-card',
@@ -6,10 +7,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./meetup-card.component.scss']
 })
 export class MeetupCardComponent implements OnInit {
-
-  constructor() { }
-
   ngOnInit(): void {
-  }
+  } 
+
+  @Input()
+    newMeetup!: IMeetup;
+
+    constructor() { }
 
 }
+
+  
+

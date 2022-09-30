@@ -1,1 +1,5 @@
-<p>users-page works!</p>
+<ul *ngFor="let user of nUsers">
+    <li>
+        <app-user-card [newUserCard]="user"> </app-user-card>
+    </li>
+</ul>
