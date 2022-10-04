@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { AuthService } from '../../services/auth.service'
 
 @Component({
@@ -8,15 +9,33 @@ import { AuthService } from '../../services/auth.service'
 })
 export class AuthPageComponent implements OnInit {
 
-  email: string = '';
-  password: string = '';
-  fio: string = '';
-  constructor(private authService: AuthService) {}
+  myFirstReactiveForm!: FormGroup<{
+    email: FormControl<string | null >;
+    password: FormControl<string | null>;
+    fio: FormControl<string | null>;
+  }>;
 
-  ngOnInit(): void {}
+  constructor(private authService: AuthService, private fb: FormBuilder) {}
+
+  ngOnInit(): void {
+    this.initForm();
+    this.myFirstReactiveForm.valueChanges.subscribe((value) =>
+	console.log(`${value.email}: ${value.password}: ${value.fio}`)
+);
+  }
+
+  
+
+  initForm() {
+		this.myFirstReactiveForm = this.fb.group({
+		  email: [''],
+	    password: [''],
+      fio: ['']
+	  });
+	}
 
   login() {
-    this.authService.login(this.email, this.password).subscribe(console.log);
+    this.authService.login(this.myFirstReactiveForm.value.email!, this.myFirstReactiveForm.value.password!).subscribe(console.log);
   }
 }
 
