@@ -12,6 +12,9 @@ import { AuthInterceptor } from "./interceptors/auth.interceptor";
 import { HeaderComponent } from './components/header/header.component';
 import { UserCardComponent } from './components/user-card/user-card.component';
 import { UsersPageComponent } from './pages/users-page/users-page.component';
+import { MeetupCreatingComponent } from './pages/meetup-creating/meetup-creating.component';
+import { SearchComponent } from './components/search/search.component';
+
 
 @NgModule({
   declarations: [
@@ -22,6 +25,9 @@ import { UsersPageComponent } from './pages/users-page/users-page.component';
     HeaderComponent,
     UsersPageComponent,
     UserCardComponent,
+    MeetupCreatingComponent,
+    SearchComponent,
+
   ],
   imports: [
     BrowserModule,

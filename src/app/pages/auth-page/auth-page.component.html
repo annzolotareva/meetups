@@ -1,6 +1,11 @@
-<form [formGroup]="myFirstReactiveForm">
+<form [formGroup]="myFirstReactiveForm" (submit)="onSubmit()">
   <input type="email" id="email" formControlName="email" placeholder="email"/>
+  <br>
   <input type="password" id="password" formControlName="password" placeholder="password"/>
+  <div class="error"
+	 *ngIf="myFirstReactiveForm.get('password')?.getError('invalidPassword') && myFirstReactiveForm.get('password')?.touched">
+	 {{myFirstReactiveForm.get('password')?.getError('invalidPassword')}}
+</div>
   <div class="">How to create account?</div>
-  <button (click)="login()" class="meetups-button" type="submit" >Log In</button>
+  <button class="meetups-button" type="submit" >Log In</button>
 </form>

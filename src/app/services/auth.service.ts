@@ -32,6 +32,15 @@ export class AuthService {
     return objUser;
   }
 
+  isAdmin(token: string) {
+    let admin = false;
+    const objUser = this.getUser(token);
+    if (objUser.roles.length == 2) {
+      admin = true;
+    } 
+    return admin;
+  }
+
 
   public get user(): any {
     const token = localStorage.getItem('del_meetups_auth_token');

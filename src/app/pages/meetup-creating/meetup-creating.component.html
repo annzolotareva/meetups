@@ -1,0 +1,25 @@
+<h1>Создание митапа</h1>
+<h1>Редактирование митапа</h1>
+<form [formGroup]="meetupReactiveForm" (submit)="onSubmit()">
+    <p class="field-header">Название</p>
+    <input type="text" id="name" formControlName="name"/>
+    <p class="field-header">Дата</p>
+    <input type="date" id="date" formControlName="date"/>
+    <p class="field-header">Время</p>
+    <input type="time" id="time" formControlName="time">
+    <p class="field-header">Место</p>
+    <input type="text" id="location" formControlName="location">
+    <p class="field-header">Описание</p>                                                  
+    <input type="text" id="description" formControlName="description">
+    <p class="field-header">Целевая аудитория</p>
+    <input type="text" id="target_audience" formControlName="target_audience">
+    <p class="field-header">Что надо знать</p>
+    <input type="text" id="need_to_know" formControlName="need_to_know">
+    <p class="field-header">Что будет</p>
+    <input type="text" id="will_happen" formControlName="will_happen">
+    <p class="field-header">Почему надо обызательно прийти</p>
+    <input type="text" id="reason_to_come" formControlName="reason_to_come">
+    <button class="meetups-button button-delete">Удалить</button>
+    <button class="meetups-button button-cancel">Отмена</button>
+    <button class="meetups-button button-save" type="submit" >Сохранить</button>
+  </form>

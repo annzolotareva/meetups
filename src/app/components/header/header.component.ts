@@ -8,14 +8,14 @@ import { AuthService } from '../../services/auth.service'
 })
 export class HeaderComponent implements OnInit {
 
-  admin: boolean = true;
-  token!: string;
+  // admin: boolean = true;
+  // token!: string;
 
-  constructor(public authService: AuthService) { 
-    authService.getUser(this.token).subscribe((arg: string) => {
-      this.token = arg;
-  })
-  }
+  // constructor(public authService: AuthService) { 
+  //   authService.getUser(this.token).subscribe((arg: string) => {
+  //     this.token = arg;
+  // })
+  // }
 
   ngOnInit(): void {
   }
