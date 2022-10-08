@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { debounceTime, distinctUntilChanged, filter, fromEvent, map } from 'rxjs';
+import { IMeetup } from 'src/app/entities/meetup/meetup.component';
+import { MeetupsService } from 'src/app/services/meetups.service';
 
 @Component({
   selector: 'app-search',
@@ -13,9 +15,9 @@ export class SearchComponent implements OnInit {
   
   @ViewChild('test', { static: true }) input: ElementRef | undefined; 
 
+  newMeetups: Array<IMeetup> = [];
 
-  title = 'RxjsOperatorChains';
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, public meetupsService: MeetupsService) {
   }
 
 
@@ -26,7 +28,7 @@ export class SearchComponent implements OnInit {
          return this.input?.nativeElement.value;
       }),
        filter((val) => {
-         return val.length >= 2;
+         return val.length >= 3;
        }),
        debounceTime(1000),
        distinctUntilChanged()
@@ -35,3 +37,21 @@ export class SearchComponent implements OnInit {
   }
 
 }
+
+
+
+
+  
+
+  
+
+  // ngOnInit(): void {
+  //   this.meetupsService.getElems()
+  //   .pipe(
+  //     distinctUntilChanged(((p: Array<IMeetup>, q: Array<IMeetup>) => p === q)),
+  //   )
+  //   .subscribe((arg: any) => {
+  //     console.log(arg);
+  //       this.nMeetups = arg;
+  // });
+  
