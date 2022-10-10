@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MeetupCardComponent } from './components/meetup-card/meetup-card.component';
 import { MeetupsComponent } from './pages/meetups/meetups.component';
+import { MyMeetupsComponent } from './pages/my-meetups/my-meetups.component';
 import { AuthPageComponent } from './pages/auth-page/auth-page.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from "./interceptors/auth.interceptor";
@@ -21,6 +22,7 @@ import { SearchComponent } from './components/search/search.component';
     AppComponent,
     MeetupCardComponent,
     MeetupsComponent,
+    MyMeetupsComponent,
     AuthPageComponent,
     HeaderComponent,
     UsersPageComponent,

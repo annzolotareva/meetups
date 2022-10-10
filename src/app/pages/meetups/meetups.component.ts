@@ -19,7 +19,7 @@ export class MeetupsComponent implements OnInit {
   ngOnInit(): void {
     this.meetupsService.getElems()
     .pipe(
-      distinctUntilChanged(((p: Array<IMeetup>, q: Array<IMeetup>) => p === q)),
+      distinctUntilChanged(((p: Array<IMeetup>, q: Array<IMeetup>) => /*deepEquel...*/ p === q)),
     )
     .subscribe((arg: any) => {
       console.log(arg);

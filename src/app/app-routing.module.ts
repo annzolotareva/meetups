@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './shared/guards/auth.guard';
-import { IsAdminGuard } from "./shared/guards/is-admin.guard";
+//import { IsAdminGuard } from "./shared/guards/is-admin.guard";
 import { AuthPageComponent } from './pages/auth-page/auth-page.component';
 import { MeetupsComponent } from "./pages/meetups/meetups.component"
 import { MyMeetupsComponent } from "./pages/my-meetups/my-meetups.component"
@@ -16,7 +16,7 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule], 
-  providers: [AuthGuard, IsAdminGuard],
+  providers: [AuthGuard],
 
 })
 export class AppRoutingModule { 

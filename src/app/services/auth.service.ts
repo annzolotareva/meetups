@@ -32,15 +32,6 @@ export class AuthService {
     return objUser;
   }
 
-  isAdmin(token: string) {
-    let admin = false;
-    const objUser = this.getUser(token);
-    if (objUser.roles.length == 2) {
-      admin = true;
-    } 
-    return admin;
-  }
-
 
   public get user(): any {
     const token = localStorage.getItem('del_meetups_auth_token');
@@ -49,6 +40,19 @@ export class AuthService {
       return user;
     } else return null;
   }
+
+  public get isAdmin(): boolean {
+    let isAdmin: boolean = false;
+    const objUser = this.user;
+    console.log(objUser);
+    objUser.id.forEach((nId: number) => {
+      if (nId == 1) {
+        isAdmin = true;
+      }
+    });
+    return isAdmin;
+  }
+
 
   public get token(): string | null {
     return localStorage.getItem('del_meetups_auth_token');

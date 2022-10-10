@@ -11,7 +11,7 @@ export class HeaderComponent implements OnInit {
   // admin: boolean = true;
   // token!: string;
 
-  // constructor(public authService: AuthService) { 
+  constructor(public authService: AuthService) {}
   //   authService.getUser(this.token).subscribe((arg: string) => {
   //     this.token = arg;
   // })

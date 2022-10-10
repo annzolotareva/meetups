@@ -1,1 +1,6 @@
-
+<app-meetup-creating></app-meetup-creating>
+<ul *ngFor="let meetup of myMeetups">
+    <li>
+        <app-meetup-card [newMeetup]="meetup"> </app-meetup-card>
+    </li>
+</ul>
