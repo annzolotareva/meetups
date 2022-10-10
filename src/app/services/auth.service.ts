@@ -4,6 +4,8 @@ import { environment } from 'src/environments/environment';
 import { map, Observable, of } from 'rxjs';
 import { Router, RouteReuseStrategy } from '@angular/router';
 import { ThisReceiver } from '@angular/compiler';
+import { forEach } from 'lodash';
+import { Roles } from '../entities/user/user.component';
 @Injectable({
   providedIn: 'root',
 })
@@ -41,17 +43,17 @@ export class AuthService {
     } else return null;
   }
 
-  public get isAdmin(): boolean {
-    let isAdmin: boolean = false;
-    const objUser = this.user;
-    console.log(objUser);
-    objUser.id.forEach((nId: number) => {
-      if (nId == 1) {
-        isAdmin = true;
-      }
-    });
-    return isAdmin;
-  }
+  // public get isAdmin(): boolean {
+  //   let isAdmin: boolean = false;
+  //   const objUser = this.user;
+  //   console.log(objUser);
+  //   objUser.id.forEach((nId: number) => {
+  //     if (nId == 1) {
+  //       isAdmin = true;
+  //     }
+  //   });
+  //   return isAdmin;
+  // }
 
 
   public get token(): string | null {
@@ -75,5 +77,24 @@ export class AuthService {
   logout() {
     localStorage.removeItem('del_meetups_auth_token');
     this.routes.navigate(['auth']);
+  }
+
+  public get isAuth(): boolean {
+    if (this.user) {
+      return true;
+    } else {
+      return false;
+  }
+  } 
+  
+  public get isAdmin(): boolean {
+    this.user.roles.forEach((role: Array<Roles>) => {
+      // if (role.id == 1) {
+      //   return true;
+      // } else {
+      //   return false;
+      // }
+    })
+    return this.isAdmin;
   }
 }

@@ -8,7 +8,8 @@ import { MyMeetupsComponent } from "./pages/my-meetups/my-meetups.component"
 import { UsersPageComponent } from "./pages/users-page/users-page.component";
 
 const routes: Routes = [
-  {path: '', component: AuthPageComponent},
+  {path: 'auth', component: AuthPageComponent},
+  { path: '',   redirectTo: '/auth', pathMatch: 'full' },
   {path: 'meetups', component: MeetupsComponent}, 
   {path: 'my-meetups', component: MyMeetupsComponent},
   {path: 'users', component: UsersPageComponent}

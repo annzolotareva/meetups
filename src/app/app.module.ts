@@ -15,6 +15,8 @@ import { UserCardComponent } from './components/user-card/user-card.component';
 import { UsersPageComponent } from './pages/users-page/users-page.component';
 import { MeetupCreatingComponent } from './pages/meetup-creating/meetup-creating.component';
 import { SearchComponent } from './components/search/search.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatCardModule } from '@angular/material/card';
 
 
 @NgModule({
@@ -36,7 +38,9 @@ import { SearchComponent } from './components/search/search.component';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-     HttpClientModule
+     HttpClientModule,
+     BrowserAnimationsModule,
+     MatCardModule,
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },],
   bootstrap: [AppComponent]

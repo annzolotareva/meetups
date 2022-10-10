@@ -7,8 +7,9 @@
     <nav>
         <a routerLink="/meetups">Все митапы</a>
         <a routerLink="/my-meetups">Мои митапы</a>
-        <a routerLink="/users" *ngIf="authService.isAdmin">Пользователи</a>
+        <a routerLink="/users">Пользователи</a>
     </nav>
+    <button (click)="authService.logout()">Разлогиниться</button>
     <div class="additional">
         <img src="" alt="">
         <img src="" alt="">

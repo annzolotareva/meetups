@@ -13,12 +13,32 @@ export class UsersPageComponent implements OnInit {
 
   constructor(public usersService: UsersService) {}
 
+  deepEqual = (a: any, b: any) => {
+    if (a === b) {
+      return true;
+    }
+    if (a === null || b === null || typeof a !== 'object' || typeof b !== 'object') {
+      return false;
+    }
+    const aKeys = Object.keys(a);
+    const bKeys = Object.keys(b);
+    if (aKeys.length !== bKeys.length) {
+      return false;
+    }
+    for (let i = 0; i < aKeys.length; i += 1) {
+      const key = aKeys[i];
+      if (!bKeys.includes(key) || !this.deepEqual(a[key], b[key])) {
+        return false;
+      }
+    }
+    return true;
+  };
   
 
   ngOnInit(): void {
     this.usersService.getElems()
     .pipe(
-      distinctUntilChanged(((p: Array<IUser>, q: Array<IUser>) => p === q))
+      distinctUntilChanged(((a: Array<IUser>, b: Array<IUser>) => this.deepEqual(a, b)))
     )
     .subscribe((arg: any) => {
       console.log(arg);
