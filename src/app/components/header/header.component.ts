@@ -7,10 +7,14 @@ import { AuthService } from '../../services/auth.service'
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+
+
   admin: boolean = true;
+
 
   constructor(public authService: AuthService) {}
 
-  ngOnInit(): void {
-  }
+
+
+  ngOnInit(): void {}
 }

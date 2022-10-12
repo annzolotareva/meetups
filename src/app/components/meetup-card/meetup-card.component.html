@@ -1,13 +1,21 @@
-<mat-card class="meetup-card">
+<mat-expansion-panel class="meetup-card">
+<mat-expansion-panel-header>
     <h3 class="meetup-card__name">{{newMeetup.name}}</h3>
     <p class="meetup-card__count-of-follower"> подписчик</p>
     <div class="meetup-card__time-location time-location">
         <p class="data-place__time">{{newMeetup.time}}</p>
         <p class="data-place__location">{{newMeetup.location}}</p>
     </div>
-    <div class="meetup-card__body">
-        <p class="meetup-card__description">{{newMeetup.description}}</p>
-        <div *ngIf="visible" class="ifMeetupOpened">
+    <p class="meetup-card__description">{{newMeetup.description}}</p>
+    <div class="meetup-card__btns">
+        <button *ngIf="!isSubscriber" class="meetup-card__btn" (click)="subscr()">Я пойду!</button>
+        <button *ngIf="isSubscriber" class="meetup-card__btn" (click)="subscr()">Не смогу пойти</button>
+        <button class="meetup-card__btn" (click)="change()">Редактировать</button>
+        <button class="meetup-card__btn" (opened)="panelOpenState = true"
+        (closed)="panelOpenState = false">Раскрытие</button>
+    </div>
+</mat-expansion-panel-header>
+        <div class="ifMeetupOpened">
             <div class="meetup-card__target-group target-group">
                 <h4 class="target-group__title">Целевая аудитория</h4>
                 <p class="target-group__description">{{newMeetup.target_audience}}</p>
@@ -25,12 +33,4 @@
                 <p class="necessity__description">{{newMeetup.reason_to_come}}</p>
             </div>
         </div>
-    </div>
-    <div class="meetup-card__btns">
-        <button *ngIf="!isSubscriber" class="meetup-card__btn" (click)="subscr()">Я пойду!</button>
-        <button *ngIf="isSubscriber" class="meetup-card__btn" (click)="subscr()">Не смогу пойти</button>
-        <button class="meetup-card__btn" (click)="change()">Редактировать</button>
-        <button *ngIf="!isOpened" class="meetup-card__btn" (click)="toggle()">Раскрытие</button>
-        <button *ngIf="isOpened" class="meetup-card__btn" (click)="toggle()">Закрытие</button>
-    </div>
-</mat-card>
+</mat-expansion-panel>

@@ -16,7 +16,8 @@ import { UsersPageComponent } from './pages/users-page/users-page.component';
 import { MeetupCreatingComponent } from './pages/meetup-creating/meetup-creating.component';
 import { SearchComponent } from './components/search/search.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatCardModule } from '@angular/material/card';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatTabsModule} from '@angular/material/tabs';
 import { MeetupCreatingPageComponent } from './pages/meetup-creating-page/meetup-creating-page.component';
 import { MeetupEditingPageComponent } from './pages/meetup-editing-page/meetup-editing-page.component';
 
@@ -44,7 +45,8 @@ import { MeetupEditingPageComponent } from './pages/meetup-editing-page/meetup-e
     ReactiveFormsModule,
      HttpClientModule,
      BrowserAnimationsModule,
-     MatCardModule,
+     MatExpansionModule,
+     MatTabsModule
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },],
   bootstrap: [AppComponent]

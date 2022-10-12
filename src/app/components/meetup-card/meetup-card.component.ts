@@ -12,6 +12,7 @@ import { MeetupEditingPageComponent } from '../../pages/meetup-editing-page/meet
   styleUrls: ['./meetup-card.component.scss']
 })
 export class MeetupCardComponent implements OnInit {
+  panelOpenState = false;
   isOpened: boolean = false;
   visible: boolean = false;
   isSubscriber: boolean = false;

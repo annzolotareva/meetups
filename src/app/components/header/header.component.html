@@ -1,10 +1,10 @@
 <header>
     <div class="header-wrap">
-        <nav>
-            <a routerLink="/meetups">Все митапы</a>
-            <a routerLink="/my-meetups">Мои митапы</a>
-            <a *ngIf="authService.isAdmin" routerLink="/users">Пользователи</a>
-        </nav>
+        <mat-tab-group animationDuration="0ms">
+            <mat-tab label="Митапы"></mat-tab>
+            <mat-tab  routerLink="/users" label="Мои митапы"></mat-tab>
+            <mat-tab *ngIf="authService.isAdmin" routerLink="/users" label="Пользователи"></mat-tab>
+        </mat-tab-group>
         <button (click)="authService.logout()">
             <img class="img" src="../../../assets/images/logout-icon.svg" alt="Выйти">
         </button>
