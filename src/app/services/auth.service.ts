@@ -67,7 +67,8 @@ export class AuthService {
         map((res) => {
           if (res.token) {
             localStorage.setItem('del_meetups_auth_token', res.token);
-            this.routes.navigate(['meetups']);
+            //this.routes.navigate(['meetups']);
+            location.replace('/meetups');
           }
           return null;
         })
@@ -76,7 +77,8 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem('del_meetups_auth_token');
-    this.routes.navigate(['auth']);
+    location.replace('/auth');
+    //this.routes.navigate(['auth']);
   }
 
   public get isAuth(): boolean {
@@ -88,13 +90,12 @@ export class AuthService {
   } 
   
   public get isAdmin(): boolean {
-    this.user.roles.forEach((role: Array<Roles>) => {
-      // if (role.id == 1) {
-      //   return true;
-      // } else {
-      //   return false;
-      // }
+    let res = false;
+    this.user.roles.forEach((role: Roles) => {
+      if (role.id == 1) {
+         res = true;
+      }
     })
-    return this.isAdmin;
+    return res;
   }
 }

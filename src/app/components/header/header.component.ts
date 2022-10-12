@@ -7,15 +7,9 @@ import { AuthService } from '../../services/auth.service'
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-
-  // admin: boolean = true;
-  // token!: string;
+  admin: boolean = true;
 
   constructor(public authService: AuthService) {}
-  //   authService.getUser(this.token).subscribe((arg: string) => {
-  //     this.token = arg;
-  // })
-  // }
 
   ngOnInit(): void {
   }

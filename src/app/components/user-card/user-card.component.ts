@@ -14,7 +14,5 @@ ngOnInit(): void {
   newUserCard!: IUser;
 
   constructor(public usersService: UsersService) { }
-  // delete(id: number) {
-  //   this.usersService.delete(id);
-  // }
+
 }

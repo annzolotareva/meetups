@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { timeInterval } from 'rxjs';
 import { MeetupsService } from 'src/app/services/meetups.service';
 
 @Component({
@@ -8,6 +9,11 @@ import { MeetupsService } from 'src/app/services/meetups.service';
   styleUrls: ['./meetup-creating.component.scss']
 })
 export class MeetupCreatingComponent implements OnInit {
+
+  newObj!: object;
+
+  @Output()
+  public createEvent = new EventEmitter();
 
   meetupReactiveForm!: FormGroup<{
     name: FormControl<string | null >;
@@ -40,14 +46,28 @@ export class MeetupCreatingComponent implements OnInit {
   ngOnInit(): void {
     this.initForm();
     this.meetupReactiveForm.valueChanges.subscribe();
+
+    this.newObj = {
+      name: this.meetupReactiveForm.value.name,
+      description: this.meetupReactiveForm.value.description,
+      time: this.meetupReactiveForm.value.date,
+      lacation: this.meetupReactiveForm.value.location,
+      target_audience: this.meetupReactiveForm.value.target_audience,
+      need_to_know: this.meetupReactiveForm.value.need_to_know,
+      will_happen: this.meetupReactiveForm.value.will_happen,
+      reason_to_come: this.meetupReactiveForm.value.reason_to_come
+    }
+
   }
+
+  
  
   onSubmit() {
     if (this.meetupReactiveForm.invalid) {
       /** Обрабатываем ошибку и прерываем выполнение метода*/
       return;
     }
-    //const string = this.meetupReactiveForm.get('date') + this.meetupReactiveForm.get('time')
+    //const dateTime = this.meetupReactiveForm.get('date') + this.meetupReactiveForm.get('time')
   }
 
 

@@ -17,6 +17,8 @@ import { MeetupCreatingComponent } from './pages/meetup-creating/meetup-creating
 import { SearchComponent } from './components/search/search.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCardModule } from '@angular/material/card';
+import { MeetupCreatingPageComponent } from './pages/meetup-creating-page/meetup-creating-page.component';
+import { MeetupEditingPageComponent } from './pages/meetup-editing-page/meetup-editing-page.component';
 
 
 @NgModule({
@@ -31,6 +33,8 @@ import { MatCardModule } from '@angular/material/card';
     UserCardComponent,
     MeetupCreatingComponent,
     SearchComponent,
+    MeetupCreatingPageComponent,
+    MeetupEditingPageComponent,
 
   ],
   imports: [

@@ -1,5 +1,4 @@
-<mat-card>
-<div class="meetup-card">
+<mat-card class="meetup-card">
     <h3 class="meetup-card__name">{{newMeetup.name}}</h3>
     <p class="meetup-card__count-of-follower"> подписчик</p>
     <div class="meetup-card__time-location time-location">
@@ -8,28 +7,30 @@
     </div>
     <div class="meetup-card__body">
         <p class="meetup-card__description">{{newMeetup.description}}</p>
-        <div class="meetup-card__target-group target-group">
-            <h4 class="target-group__title">Целевая аудитория</h4>
-            <p class="target-group__description">{{newMeetup.target_audience}}</p>
-        </div>
-        <div class="meetup-card__need-to-know need-to-know">
-            <h4 class="need-to-know__title">Что нужно знать</h4>
-            <p class="need-to-know__description">{{newMeetup.need_to_know}}</p>
-        </div>
-        <div class="meetup-card__meetup-plan meetup-plan">
-            <h4 class="meetup-plan__title">Что будет</h4>
-            <p class="meetup-plan__description">{{newMeetup.will_happen}}</p>
-        </div>
-        <div class="meetup-card__necessity necessity">
-            <h4 class="necessity__title">Почему надо обязательно прийти</h4>
-            <p class="necessity__description">{{newMeetup.reason_to_come}}</p>
+        <div *ngIf="visible" class="ifMeetupOpened">
+            <div class="meetup-card__target-group target-group">
+                <h4 class="target-group__title">Целевая аудитория</h4>
+                <p class="target-group__description">{{newMeetup.target_audience}}</p>
+            </div>
+            <div class="meetup-card__need-to-know need-to-know">
+                <h4 class="need-to-know__title">Что нужно знать</h4>
+                <p class="need-to-know__description">{{newMeetup.need_to_know}}</p>
+            </div>
+            <div class="meetup-card__meetup-plan meetup-plan">
+                <h4 class="meetup-plan__title">Что будет</h4>
+                <p class="meetup-plan__description">{{newMeetup.will_happen}}</p>
+            </div>
+            <div class="meetup-card__necessity necessity">
+                <h4 class="necessity__title">Почему надо обязательно прийти</h4>
+                <p class="necessity__description">{{newMeetup.reason_to_come}}</p>
+            </div>
         </div>
     </div>
     <div class="meetup-card__btns">
-        <button class="meetup-card__btn">Я пойду!</button>
-        <button class="meetup-card__btn">Не смогу пойти</button>
-        <button class="meetup-card__btn">Редактировать</button>
-        <button class="meetup-card__btn">Раскрытие</button>
+        <button *ngIf="!isSubscriber" class="meetup-card__btn" (click)="subscr()">Я пойду!</button>
+        <button *ngIf="isSubscriber" class="meetup-card__btn" (click)="subscr()">Не смогу пойти</button>
+        <button class="meetup-card__btn" (click)="change()">Редактировать</button>
+        <button *ngIf="!isOpened" class="meetup-card__btn" (click)="toggle()">Раскрытие</button>
+        <button *ngIf="isOpened" class="meetup-card__btn" (click)="toggle()">Закрытие</button>
     </div>
-</div>
 </mat-card>

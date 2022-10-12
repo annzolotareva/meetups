@@ -1,18 +1,13 @@
 <header>
-    <h1>MeetUps</h1>
-    <div class="images">
-        <img src="" alt="">
-        <img src="" alt="">
-    </div>
-    <nav>
-        <a routerLink="/meetups">Все митапы</a>
-        <a routerLink="/my-meetups">Мои митапы</a>
-        <a routerLink="/users">Пользователи</a>
-    </nav>
-    <button (click)="authService.logout()">Разлогиниться</button>
-    <div class="additional">
-        <img src="" alt="">
-        <img src="" alt="">
+    <div class="header-wrap">
+        <nav>
+            <a routerLink="/meetups">Все митапы</a>
+            <a routerLink="/my-meetups">Мои митапы</a>
+            <a *ngIf="authService.isAdmin" routerLink="/users">Пользователи</a>
+        </nav>
+        <button (click)="authService.logout()">
+            <img class="img" src="../../../assets/images/logout-icon.svg" alt="Выйти">
+        </button>
     </div>
     <router-outlet></router-outlet>
 </header>
