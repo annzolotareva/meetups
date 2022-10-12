@@ -1,6 +1,9 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { timeInterval } from 'rxjs';
+import { Router } from '@angular/router';
+import { map } from 'lodash';
+import { mergeMap, pipe, Subscription, take, timeInterval } from 'rxjs';
+import { IMeetup } from 'src/app/entities/meetup/meetup.component';
 import { MeetupsService } from 'src/app/services/meetups.service';
 
 @Component({
@@ -8,13 +11,16 @@ import { MeetupsService } from 'src/app/services/meetups.service';
   templateUrl: './meetup-creating.component.html',
   styleUrls: ['./meetup-creating.component.scss']
 })
-export class MeetupCreatingComponent implements OnInit {
+export class MeetupCreatingComponent implements OnInit, OnDestroy {
+  nMeetups: Array<IMeetup> = [];
+  subscription!: Subscription;
 
-  newObj!: object;
+  newObj!: any;
+  meetupId!: number;
 
   @Output()
   public createEvent = new EventEmitter();
-
+  
   meetupReactiveForm!: FormGroup<{
     name: FormControl<string | null >;
     date: FormControl<string | null>;
@@ -27,7 +33,8 @@ export class MeetupCreatingComponent implements OnInit {
     reason_to_come: FormControl<string | null>;
   }>;
 
-  constructor(private meetupsService: MeetupsService, private fb: FormBuilder) {}
+  constructor(private meetupsService: MeetupsService, private fb: FormBuilder, private router: Router) {}
+  ngOnDestroy(): void {}
 
   initForm() {
 		this.meetupReactiveForm = this.fb.group({
@@ -46,7 +53,15 @@ export class MeetupCreatingComponent implements OnInit {
   ngOnInit(): void {
     this.initForm();
     this.meetupReactiveForm.valueChanges.subscribe();
+  }
 
+  
+ 
+  onSubmit() {
+    if (this.meetupReactiveForm.invalid) {
+      /** Обрабатываем ошибку и прерываем выполнение метода*/
+      return;
+    }
     this.newObj = {
       name: this.meetupReactiveForm.value.name,
       description: this.meetupReactiveForm.value.description,
@@ -57,18 +72,11 @@ export class MeetupCreatingComponent implements OnInit {
       will_happen: this.meetupReactiveForm.value.will_happen,
       reason_to_come: this.meetupReactiveForm.value.reason_to_come
     }
+    this.createEvent.emit(this.newObj);
+    
+    console.log(this.nMeetups); 
 
-  }
-
-  
- 
-  onSubmit() {
-    if (this.meetupReactiveForm.invalid) {
-      /** Обрабатываем ошибку и прерываем выполнение метода*/
-      return;
-    }
+    //this.router.navigate(['my-meetups']);
     //const dateTime = this.meetupReactiveForm.get('date') + this.meetupReactiveForm.get('time')
   }
-
-
 }

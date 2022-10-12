@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { take } from 'rxjs';
+import { IMeetup } from 'src/app/entities/meetup/meetup.component';
+import { MeetupsService } from 'src/app/services/meetups.service';
 import { MeetupCreatingComponent } from "../meetup-creating/meetup-creating.component";
 
 @Component({
@@ -8,13 +11,14 @@ import { MeetupCreatingComponent } from "../meetup-creating/meetup-creating.comp
 })
 export class MeetupCreatingPageComponent implements OnInit {
 
-  constructor() { }
+  constructor(private meetupsService: MeetupsService) { }
 
-  create(value: object){
-    console.log(value);
+  create(newValue: IMeetup){
+    this.meetupsService.createNewMeetup(newValue);
   }
 
   ngOnInit(): void {
+    
   }
 
 }

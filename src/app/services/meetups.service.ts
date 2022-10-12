@@ -13,6 +13,7 @@ import { IUser } from '../entities/user/user.component';
 export class MeetupsService{
   meetups$: Observable<Array<IMeetup>> = this.http.get<Array<IMeetup>>('/api/meetup');
   subject$ = new BehaviorSubject<IMeetup[]>([]);
+  newMeetup!: Array<IMeetup>;
   
   
   deepEqual = (a: any, b: any) => {
@@ -55,36 +56,56 @@ export class MeetupsService{
     .pipe(
       distinctUntilChanged((a: Array<IMeetup>, b: Array<IMeetup>) => this.deepEqual(a, b)),
     )
+    //subscribe и запись массива, запись Data в массив
   }
 
-  // public get subscribers(): Array<IUser> {
-  //   let subscriber = false;
-  //   this.getElems()
-  //   .pipe(
-  //     mergeMap((res: Array<IMeetup>) => res),
-  //     filter((res: IMeetup) => res.users<Array> === this.authService.user.id)
-  //     )
-  //   .subscribe((arg: any) => {
-  //     console.log(arg);
-  //       this.myMeetups = arg;
-  //   }
-  //   )
-  // } 
+  public addSubscriber(idMeetup: number, idUser: number){
+    const body = {
+    idMeetup: idMeetup,
+    idUser: idUser
+    };
+    return this.http.put('meetups', body); 
+  } 
+
+  public deleteSubscriber(idMeetup: number, idUser: number) {
+    const body = {
+      idMeetup: idMeetup,
+      idUser: idUser
+    }
+   // return this.http.delete('meetups', body); 
+  }
 
   createMeetup(): void {
     location.replace('creating');
   }
 
-  changeMeetup(): void {
+  changeMeetup(id: number): void {
     console.log('hi');
-    this.router.navigate(['meetups/edit/:id']);
+    this.router.navigate([`meetups/edit/${id}`]);
   }
+
+  createNewMeetup(newMeetup: IMeetup){     
+    const body = {
+      name: newMeetup.name, 
+      description: newMeetup.description,
+      time: newMeetup.time,
+      lacation: newMeetup.location,
+      target_audience: newMeetup.target_audience,
+      need_to_know: newMeetup.need_to_know,
+      will_happen: newMeetup.will_happen,
+      reason_to_come: newMeetup.reason_to_come
+    };
+    return this.http.post('/meetup', body); 
+}
 
   // delete(id: number): void{
   //   this.meetups = this.meetups.filter(elem => elem.id !== id);
   // }
   
-  //  addElem(meetup: IMeetup): void {
-  //     this.meetups.push(meetup);
-  //  }
+    // addElem(meetup: IMeetup): void {
+    //   this.getElems()
+    //   .pipe(
+
+    //   )
+    // }
 }

@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy } from '@angular/compiler';
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { IMeetup } from 'src/app/entities/meetup/meetup.component';
+import { AuthService } from 'src/app/services/auth.service';
 import { MeetupsService } from 'src/app/services/meetups.service';
 import { MeetupEditingPageComponent } from '../../pages/meetup-editing-page/meetup-editing-page.component'
 
@@ -15,7 +16,7 @@ export class MeetupCardComponent implements OnInit {
   visible: boolean = false;
   isSubscriber: boolean = false;
   
-  constructor(public meetupsService: MeetupsService, private router: Router) { }
+  constructor(public meetupsService: MeetupsService, private router: Router, public authService: AuthService) { }
   toggle(){
     this.isOpened = !this.isOpened;
     if (this.isOpened) {
@@ -30,13 +31,17 @@ export class MeetupCardComponent implements OnInit {
 
   subscr() {
     this.isSubscriber = !this.isSubscriber;
-    //this.meetupsService.subscriber(this.newMeetup.id, ...)
+    this.meetupsService.addSubscriber(this.newMeetup.id, this.authService.user.id)
+  }
+
+  unSubscr() {
+    this.isSubscriber = !this.isSubscriber;
+    this.meetupsService.addSubscriber(this.newMeetup.id, this.authService.user.id)
   }
 
 
   change(): void {
-    console.log(MeetupEditingPageComponent.nId);
-    this.router.navigate(['meetups/edit/:id={MeetupEditingPageComponent.nId}']);
+    this.meetupsService.changeMeetup(this.newMeetup.id);
   }
 
   ngOnInit(): void {

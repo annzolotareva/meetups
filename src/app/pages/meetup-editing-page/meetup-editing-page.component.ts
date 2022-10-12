@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { filter, mergeMap, Subscription } from 'rxjs';
+import { filter, mergeMap, Subscription, take } from 'rxjs';
 import { IMeetup } from 'src/app/entities/meetup/meetup.component';
 import { MeetupsService } from 'src/app/services/meetups.service';
 import { MeetupCardComponent } from '../../components/meetup-card/meetup-card.component';
@@ -16,7 +16,7 @@ export class MeetupEditingPageComponent implements OnInit {
   newMeetup!: IMeetup;
   subscription!: Subscription;
   meetupId!: number;
-  static nId: number;
+  nId!: number;
   
 
   constructor(public meetupsService: MeetupsService, private router: Router) {}
@@ -27,14 +27,11 @@ export class MeetupEditingPageComponent implements OnInit {
     
     this.subscription = this.meetupsService.getElems()
     .pipe(
-      mergeMap((res: Array<IMeetup>) => res),
-      filter((res: IMeetup) => res.id === this.meetupId)
+      take(1)
     )
-    .subscribe((meetup: IMeetup) => {
-      console.log('mimimmim');
-      console.log(meetup);
-        this.newMeetup = meetup;
-        MeetupEditingPageComponent.nId = meetup.id;
+    .subscribe((arg: IMeetup[]) => {
+      arg.find(elem => elem.id === this.meetupId)
+      this.newMeetups.push(this.newMeetup);
     });
   }
    ngOnDestroy() {

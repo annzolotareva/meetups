@@ -11,8 +11,8 @@ import { MeetupCreatingPageComponent } from "./pages/meetup-creating-page/meetup
 import { MeetupEditingPageComponent } from "./pages/meetup-editing-page/meetup-editing-page.component";
 
 const routes: Routes = [
+  {path: '',   redirectTo: '/auth', pathMatch: 'full' },
   {path: 'auth', component: AuthPageComponent},
-  { path: '',   redirectTo: '/auth', pathMatch: 'full' },
   {path: 'meetups', component: MeetupsComponent}, 
   {path: 'my-meetups', component: MyMeetupsComponent},
   {path: 'users', component: UsersPageComponent},

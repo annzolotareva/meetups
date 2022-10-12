@@ -67,8 +67,7 @@ export class AuthService {
         map((res) => {
           if (res.token) {
             localStorage.setItem('del_meetups_auth_token', res.token);
-            //this.routes.navigate(['meetups']);
-            location.replace('/meetups');
+            this.routes.navigate(['meetups']);
           }
           return null;
         })
@@ -77,8 +76,7 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem('del_meetups_auth_token');
-    location.replace('/auth');
-    //this.routes.navigate(['auth']);
+    this.routes.navigate(['auth']);
   }
 
   public get isAuth(): boolean {
