@@ -1,5 +1,22 @@
+$defaulColor: #2C2C2C;
 .meetup-card {
     max-width: 1362px;
+    min-height: 162px;
     width: 100%;
     text-align: left;
+}
+
+mat-expansion-panel-header{
+    min-height: 162px;
+}
+
+.mat-expansion-panel {
+    background: #2C2C2C; 
+    color: #FFFFFF;
+}
+h3 {
+    font-size: 24px;
+}
+h4 {
+    font-size: 20px;
 }

@@ -33,11 +33,41 @@ body { font-family: Roboto, "Helvetica Neue", sans-serif;  overflow: hidden;
   flex-direction: column;
   min-height: 100%;
   background-color: $backgroundColor;
+  color: $boldColor;
+}
+
+h1{
+  font-style: normal;
+font-weight: 700;
+font-size: 56px;
+line-height: 76px
+}
+
+app-meetups {
+  display: block;
+  margin-left: auto;
+  margin-right: auto 
+}
+
+.mat-tab-links {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.ng-star-inserted {
+  justify-content: center;
 }
 
 
+.mat-expansion-panel-body {
+  font-size: 18px;
+}
 
+.mat-expansion-indicator {
+  color: #FFFFFF;
+}
 
-app-meetups {
-  margin: auto;
+.mat-expansion-panel-header-description, .mat-expansion-indicator::after {
+  color: #FFFFFF;
 }

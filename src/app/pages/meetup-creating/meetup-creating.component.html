@@ -1,8 +1,8 @@
 <form [formGroup]="meetupReactiveForm">
     <p class="field-header">Название</p>
     <input type="text" id="name" formControlName="name"/>
-    <p class="field-header">Дата</p>
-    <input type="date" id="date" formControlName="date"/>
+    <!-- <p class="field-header">Дата</p>
+    <input type="date" id="date" formControlName="date"/> -->
     <p class="field-header">Время</p>
     <input type="time" id="time" formControlName="time">
     <p class="field-header">Место</p>
@@ -17,6 +17,6 @@
     <input type="text" id="will_happen" formControlName="will_happen">
     <p class="field-header">Почему надо обызательно прийти</p>
     <input type="text" id="reason_to_come" formControlName="reason_to_come">
-    <button class="meetups-button button-cancel">Отмена</button>
-    <button class="meetups-button button-save" type="submit" (click)="onSubmit()" >Сохранить</button>
+    <button class="meetups-button button-cancel" (click)="cancelEditForm()">Отмена</button>
+    <button class="meetups-button button-save" type="button" (click)="onSubmit()" >Сохранить</button>
   </form>

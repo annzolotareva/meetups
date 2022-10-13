@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { forEach, merge } from 'lodash';
+import { find, forEach, merge } from 'lodash';
 import { distinctUntilChanged, filter, from, mergeMap, Subscription } from 'rxjs';
 import { IMeetup } from 'src/app/entities/meetup/meetup.component';
 import { IUser } from 'src/app/entities/user/user.component';
@@ -21,16 +21,11 @@ export class MyMeetupsComponent implements OnInit, OnDestroy  {
   
 
   ngOnInit(): void {
-    
     this.subscription = this.meetupsService.getElems()
-    .pipe(
-      mergeMap((res: Array<IMeetup>) => res),
-      filter((res: IMeetup) => res.owner.id === this.authService.user.id)
-      )
     .subscribe((arg: any) => {
-      console.log(arg);
-        this.myMeetups = arg;
-  });
+        this.myMeetups = arg.filter((elem: IMeetup) => elem.owner.id === this.authService.user.id)
+        console.log(this.myMeetups)
+    });
   }
 
   ngOnDestroy() {

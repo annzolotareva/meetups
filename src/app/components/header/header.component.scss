@@ -1,20 +1,32 @@
+$boldColor: #E9E9E9;
+$defaulColor: #2C2C2C;
 header{
     max-height: 120px;
     height: 100%;
     width: 100%;
-    text-align: center;
 }
+
+
 button {
     border: none; 
     outline: none;
-    background-color: #fff;
+    background-color: none;
 }
 .img {
     
     max-width: 48px;
     width: 100%;
 }
-a {
-    text-decoration: none;
-    margin-right: 15px;
+.mat-tab-links, .mat-tab-list , .mat-tab-link-container {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.mat-tab-link{
+    color: $boldColor !important;
+}
+
+.mat-tab-nav-bar, .mat-tab-link{
+    background: $defaulColor !important;
 }

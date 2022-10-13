@@ -12,51 +12,67 @@ import { MeetupsService } from 'src/app/services/meetups.service';
   styleUrls: ['./meetup-creating.component.scss']
 })
 export class MeetupCreatingComponent implements OnInit, OnDestroy {
-  nMeetups: Array<IMeetup> = [];
   subscription!: Subscription;
 
   newObj!: any;
   meetupId!: number;
+  newMeetup!: IMeetup | undefined;
 
   @Output()
   public createEvent = new EventEmitter();
   
   meetupReactiveForm!: FormGroup<{
-    name: FormControl<string | null >;
-    date: FormControl<string | null>;
-    time: FormControl<string | null>;
-    location: FormControl<string | null>;
-    description: FormControl<string | null>;
-    target_audience: FormControl<string | null>;
-    need_to_know: FormControl<string | null>;
-    will_happen: FormControl<string | null>;
-    reason_to_come: FormControl<string | null>;
+    name: FormControl<string | null | undefined>;
+    time: FormControl<string | null | undefined>;
+    location: FormControl<string | null | undefined>;
+    description: FormControl<string | null | undefined>;
+    target_audience: FormControl<string | null | undefined>;
+    need_to_know: FormControl<string | null | undefined>;
+    will_happen: FormControl<string | null | undefined>;
+    reason_to_come: FormControl<string | null | undefined>;
   }>;
+  
 
   constructor(private meetupsService: MeetupsService, private fb: FormBuilder, private router: Router) {}
-  ngOnDestroy(): void {}
 
+  ngOnInit(): void {
+    const from = this.router.url.lastIndexOf('/');
+    let meetupId = Number(this.router.url.slice(from + 1));
+    
+    this.subscription = this.meetupsService.getElems()
+    .pipe(
+      take(1)
+    )
+    .subscribe((arg: IMeetup[]) => {
+      
+      this.newMeetup = arg.find(elem => elem.id === meetupId)  
+      console.log(this.newMeetup);
+
+      this.initForm();
+    this.meetupReactiveForm.valueChanges.subscribe();
+      // this.newMeetups.push(this.newMeetup);
+      // console.log(this.newMeetups);
+    });
+  }
   initForm() {
 		this.meetupReactiveForm = this.fb.group({
-		  name: ['', [Validators.required]],
-      date: ['', [Validators.required]],
-	    time: ['', [Validators.required]],
-      location: ['', [Validators.required]],
-      description: ['', [Validators.required]],
-      target_audience: ['', [Validators.required]],
-      need_to_know: ['', [Validators.required]],
-      will_happen: ['', [Validators.required]],
-      reason_to_come: ['', [Validators.required]]
+		  name: [ this.newMeetup?.name, [Validators.required]],
+	    time: [this.newMeetup?.time, [Validators.required]],
+      location: [this.newMeetup?.location, [Validators.required]],
+      description: [this.newMeetup?.description, [Validators.required]],
+      target_audience: [this.newMeetup?.target_audience, [Validators.required]],
+      need_to_know: [this.newMeetup?.need_to_know, [Validators.required]],
+      will_happen: [this.newMeetup?.will_happen, [Validators.required]],
+      reason_to_come: [this.newMeetup?.reason_to_come, [Validators.required]]
 	  });
 	}
 
-  ngOnInit(): void {
-    this.initForm();
-    this.meetupReactiveForm.valueChanges.subscribe();
-  }
-
   
- 
+  
+   ngOnDestroy() {
+    this.subscription.unsubscribe()
+}
+
   onSubmit() {
     if (this.meetupReactiveForm.invalid) {
       /** Обрабатываем ошибку и прерываем выполнение метода*/
@@ -65,18 +81,22 @@ export class MeetupCreatingComponent implements OnInit, OnDestroy {
     this.newObj = {
       name: this.meetupReactiveForm.value.name,
       description: this.meetupReactiveForm.value.description,
-      time: this.meetupReactiveForm.value.date,
+      time: this.meetupReactiveForm.value.time,
       lacation: this.meetupReactiveForm.value.location,
       target_audience: this.meetupReactiveForm.value.target_audience,
       need_to_know: this.meetupReactiveForm.value.need_to_know,
       will_happen: this.meetupReactiveForm.value.will_happen,
       reason_to_come: this.meetupReactiveForm.value.reason_to_come
     }
-    this.createEvent.emit(this.newObj);
+    // this.createEvent.emit(this.newObj);
+    this.meetupsService.createNewMeetup(this.newObj).subscribe();
+    this.meetupsService.refresah();
+    //console.log(this.nMeetups); 
+    this.router.navigate(['my-meetups']);
     
-    console.log(this.nMeetups); 
+  }
 
-    //this.router.navigate(['my-meetups']);
-    //const dateTime = this.meetupReactiveForm.get('date') + this.meetupReactiveForm.get('time')
+  cancelEditForm(){
+    this.meetupsService.cancel();
   }
 }

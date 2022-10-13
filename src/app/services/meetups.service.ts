@@ -56,7 +56,6 @@ export class MeetupsService{
     .pipe(
       distinctUntilChanged((a: Array<IMeetup>, b: Array<IMeetup>) => this.deepEqual(a, b)),
     )
-    //subscribe и запись массива, запись Data в массив
   }
 
   public addSubscriber(idMeetup: number, idUser: number){
@@ -90,12 +89,17 @@ export class MeetupsService{
       description: newMeetup.description,
       time: newMeetup.time,
       lacation: newMeetup.location,
+      duration: 90, 
       target_audience: newMeetup.target_audience,
       need_to_know: newMeetup.need_to_know,
       will_happen: newMeetup.will_happen,
       reason_to_come: newMeetup.reason_to_come
     };
-    return this.http.post('/meetup', body); 
+    return this.http.post('/api/meetup', body);
+}
+
+cancel() {
+  this.router.navigate(['my-meetups']);
 }
 
   // delete(id: number): void{

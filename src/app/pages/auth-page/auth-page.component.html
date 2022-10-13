@@ -1,3 +1,5 @@
+<div class="modal-sign-up__button">
+<div class="auth-page__title">Авторизация</div>
 <form [formGroup]="myFirstReactiveForm" (submit)="onSubmit()">
   <input type="email" id="email" formControlName="email" placeholder="email"/>
   <br>
@@ -9,26 +11,4 @@
   <div class="">How to create account?</div>
   <button class="meetups-button" type="submit" >Log In</button>
 </form>
-
-
-<!-- <div name="modal-sign-up" class="modal-sign-up modal" id="modal-sign-up" style="display: none; opacity: 1;">
-  <div class="modal__close-btn modal__close-btn-sign-up">
-      <img src="./img/main-page/close-button.svg" alt="">
-  </div>
-  <div class="modal__title">Авторизация</div>
-  <form class="modal-sign-up__form" name="modal-sign-up__form" action="project-repository.html">
-      <div class=" input-areas">
-          <div class="input-area">
-              <img src="./img/main-page/email-icon.svg" alt="">
-              <input class="form__email" type="email" placeholder="Электронная почта" name="user-email" required>
-          </div>
-          <div class="input-area">
-              <img src="./img/main-page/password-icon.svg" alt="">
-              <input class="form__password" type="password" placeholder="Пароль" name="user-password" required>
-          </div>
-      </div>
-      <button class="modal-sign-up__button" type="submit">Войти</button>
-      <div class="modal-sing-up__footer">Ещё нет аккаунта? <span class="sign-in-text">
-              <link rel="stylesheet" href="#modal-sign-in">Зарегистрироваться</span></div>
-  </form>
-</div> -->
+</div>
