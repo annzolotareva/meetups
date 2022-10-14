@@ -10,38 +10,25 @@ import { MeetupCardComponent } from '../../components/meetup-card/meetup-card.co
   templateUrl: './meetup-editing-page.component.html',
   styleUrls: ['./meetup-editing-page.component.scss']
 })
-export class MeetupEditingPageComponent {
+export class MeetupEditingPageComponent implements OnInit{
   
   newMeetups: Array<IMeetup> = [];
-  // @Output()
-  // public parentEvent = new EventEmitter();
   
-  // newMeetup!: IMeetup | undefined;
-  // subscription!: Subscription;
-  // nId!: number;
+  newMeetup!: IMeetup | undefined;
+  subscription!: Subscription;
+  nId!: number;
   
 
-  // constructor(public meetupsService: MeetupsService, private router: Router) {}
+  constructor(public meetupsService: MeetupsService, private router: Router) {}
 
-  // ngOnInit(): void {
-  //   const from = this.router.url.lastIndexOf('/');
-  //   let meetupId = Number(this.router.url.slice(from + 1));
-    
-  //   this.subscription = this.meetupsService.getElems()
-  //   .pipe(
-  //     take(1)
-  //   )
-  //   .subscribe((arg: IMeetup[]) => {
-      
-  //     this.newMeetup = arg.find(elem => elem.id === meetupId)  
-  //     console.log(this.newMeetup);
-  //     this.parentEvent.emit(this.newMeetup)
-  //     // this.newMeetups.push(this.newMeetup);
-  //     // console.log(this.newMeetups);
-//   //   });
-//   }
-//    ngOnDestroy() {
-//     this.subscription.unsubscribe()
-// }
+change(){
+     this.meetupsService.changeMeetup(this.nId);
+       }
+
+  ngOnInit(): void {
+    const from = this.router.url.lastIndexOf('/');
+    let meetupId = Number(this.router.url.slice(from + 1));
+  }
+  
 
 }

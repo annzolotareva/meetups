@@ -1,24 +1,53 @@
-input.ng-touched.ng-invalid{
-	border-color: red;
-}
+$accentColor: #B85526;
+$defaulColor: #2C2C2C;
+$secondaryColor: #4C3F78;
 
 
-
-.modal-sign-up__button {
+.auth-page-form {
 	position: fixed;
     top: 20%;
     left: 50%;
     transform: translateX(-50%);
-    width: 477px;
-    max-width: 100%;
-    padding: 55px 25px 35px;
-    z-index: 6;
-    max-width: 350px;
+    padding: 0px 33px 24px;
     text-align: center;
+    max-width: 400px;
     width: 100%;
-    padding-top: 12px;
-    padding-bottom: 12px;
-    margin-bottom: 16px;
+}
+
+.auth-page-form__title {
+    color: $accentColor;
+    font-size: 33px;
+    padding: 27px;
+}
+
+.error{
+    margin: 10px;
+}
+
+.how-to-create {
+    margin: 10px;
+}
+
+.inputs-wrapper {
     text-align: center;
-border-radius: 6px;
+    max-width: 300px;
+    width: 100%;
+}
+
+.input-wrapper {
+    color: #ffff;
+    background: $defaulColor !important;
+    background-color: $defaulColor !important;
+    padding: 8px;
+    margin: 12px;
+    text-align: center;
+    max-width: 300px;
+    width: 100%;
+    border-radius: 4px;
+}
+
+.meetups-button {
+    color:#ffff;
+    background: $secondaryColor;
+    font-size: 18px;
 }

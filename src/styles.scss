@@ -28,7 +28,7 @@ $backgroundColor: #1E1E1E;
 $boldColor: #E9E9E9;
 
 html, body { height: 100%; }
-body { font-family: Roboto, "Helvetica Neue", sans-serif;  overflow: hidden;
+body { font-family: Roboto, "Helvetica Neue", sans-serif;  overflow: scroll;
   display: flex;
   flex-direction: column;
   min-height: 100%;
@@ -53,6 +53,7 @@ app-meetups {
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
+  margin: 0 41px;
 }
 
 .ng-star-inserted {
@@ -71,3 +72,109 @@ app-meetups {
 .mat-expansion-panel-header-description, .mat-expansion-indicator::after {
   color: #FFFFFF;
 }
+
+input {
+  background: $defaulColor !important;
+  color: #FFFFFF !important;
+}
+
+input:-internal-autofill-selected {
+  background-image: none !important;
+  background: $defaulColor;
+  background-color: $defaulColor !important;
+  color: #FFFFFF !important;
+}
+
+.meetup-card {
+  max-width: 1362px;
+  min-height: 162px;
+  width: 100%;
+  text-align: left;
+}
+
+mat-expansion-panel-header{
+  min-height: 162px;
+}
+
+mat-content{
+  display: block;
+}
+
+.meetup-card__header{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.mat-expansion-panel {
+  background: #2C2C2C; 
+  color: #FFFFFF;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 20px;
+}
+
+.meetup-card__name{
+  padding: 14px;
+}
+
+.meetup-owner{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  max-width: 200px;
+  width: 100%;
+}
+
+.meetup-owner__img{ 
+  max-width: 25px;
+  width: 100%;
+  margin-right: 10px;
+}
+
+.meetup-card__time-location {
+  display: block;
+  max-width: 200px;
+  text-align: left;
+}
+
+.meetup-card__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.meetup-card__btn {
+  max-width: 160px;
+  width: 100%;
+}
+.meetup-card__btn_subscr {
+  color: #FFFFFF;
+  background: $secondaryColor;
+  margin: 8px;
+}
+
+.meetup-card__btn_unsubscr {
+  color: $secondaryColor;
+  background: #B4B4C0;
+}
+
+.meetup-card__btn_edit {
+  color: #FFFFFF;
+  background: $accentColor;
+}
+
+.meetup-card__btns {
+text-align: center;   
+}
+
+ul {
+  list-style: none;
+  display: flex;
+  max-width: 1362px;
+  width: 100%;
+}
+
+

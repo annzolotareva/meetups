@@ -18,6 +18,9 @@ import { SearchComponent } from './components/search/search.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatTabsModule} from '@angular/material/tabs';
+import {MatButtonModule} from '@angular/material/button';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatIconModule} from '@angular/material/icon';
 import { MeetupCreatingPageComponent } from './pages/meetup-creating-page/meetup-creating-page.component';
 import { MeetupEditingPageComponent } from './pages/meetup-editing-page/meetup-editing-page.component';
 
@@ -46,7 +49,10 @@ import { MeetupEditingPageComponent } from './pages/meetup-editing-page/meetup-e
      HttpClientModule,
      BrowserAnimationsModule,
      MatExpansionModule,
-     MatTabsModule
+     MatTabsModule,
+     MatButtonModule, 
+     MatFormFieldModule, 
+     MatIconModule
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },],
   bootstrap: [AppComponent]

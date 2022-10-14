@@ -1,18 +1,24 @@
 <mat-expansion-panel class="meetup-card">
 <mat-expansion-panel-header>
-    <h3 class="meetup-card__name">{{newMeetup.name}}</h3>
-    <p class="meetup-card__count-of-follower"> подписчик</p>
-    <div class="meetup-card__time-location time-location">
-        <p class="data-place__time">{{newMeetup.time}}</p>
-        <p class="data-place__location">{{newMeetup.location}}</p>
+    <div class="meetup-card__top">
+        <div class="meetup-card__header">
+            <h3 class="meetup-card__name">{{newMeetup.name}}</h3>
+            <p class="meetup-card__count-of-follower">{{newMeetup.users.length}} {{subs}}</p>
+        </div>
+        <div class="meetup-card__time-location time-location">
+            <p class="data-place__time">{{newMeetup.time}}</p>
+            <p class="data-place__location">{{newMeetup.location}}</p>
+        </div>
     </div>
     <p class="meetup-card__description">{{newMeetup.description}}</p>
+    <div class="meetup-owner">
+        <img class="meetup-owner__img" src="../../../assets/images/small-mdi_person.svg" alt="">
+        <p>{{newMeetup.owner.fio}}</p>
+    </div>
     <div class="meetup-card__btns">
-        <button *ngIf="!isSubscriber" class="meetup-card__btn" (click)="subscr()">Я пойду!</button>
-        <button *ngIf="isSubscriber" class="meetup-card__btn" (click)="subscr()">Не смогу пойти</button>
-        <button class="meetup-card__btn" (click)="change()">Редактировать</button>
-        <button class="meetup-card__btn" (opened)="panelOpenState = true"
-        (closed)="panelOpenState = false">Раскрытие</button>
+        <button mat-raised-button *ngIf="!isSubscriber" class="meetup-card__btn meetup-card__btn_subscr" (click)="subscr()">Я пойду!</button>
+        <button mat-raised-button *ngIf="isSubscriber" class="meetup-card__btn meetup-card__btn_unsubscr" (click)="unSubscr()">Не смогу пойти</button>
+        <button mat-raised-button class="meetup-card__btn meetup-card__btn_edit" (click)="change()">Редактировать</button>
     </div>
 </mat-expansion-panel-header>
         <div class="ifMeetupOpened">

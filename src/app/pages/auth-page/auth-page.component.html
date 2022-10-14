@@ -1,14 +1,19 @@
-<div class="modal-sign-up__button">
-<div class="auth-page__title">Авторизация</div>
+<div class="auth-page-form">
+<div class="auth-page-form__title">Авторизация</div>
 <form [formGroup]="myFirstReactiveForm" (submit)="onSubmit()">
-  <input type="email" id="email" formControlName="email" placeholder="email"/>
-  <br>
-  <input type="password" id="password" formControlName="password" placeholder="password"/>
+  <div class="inputs-wrapper">
+    <div class="input-wrapper">
+      <input type="email" id="email" formControlName="email" placeholder="email"/>
+    </div>
+    <div class="input-wrapper">
+      <input type="password" id="password" formControlName="password" placeholder="password"/>
+    </div>
+  </div>
   <div class="error"
 	 *ngIf="myFirstReactiveForm.get('password')?.getError('invalidPassword') && myFirstReactiveForm.get('password')?.touched">
 	 {{myFirstReactiveForm.get('password')?.getError('invalidPassword')}}
 </div>
-  <div class="">How to create account?</div>
-  <button class="meetups-button" type="submit" >Log In</button>
+  <div class="how-to-create">Как создать аккаунт?</div>
+  <button mat-raised-button class="meetups-button" type="submit" >Войти</button>
 </form>
 </div>

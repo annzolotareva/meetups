@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
-import { AuthService } from '../../services/auth.service'
+import { AuthService } from '../../services/auth.service';
+
 
 @Component({
   selector: 'app-auth-page',
@@ -9,6 +10,7 @@ import { AuthService } from '../../services/auth.service'
 })
 export class AuthPageComponent implements OnInit {
 
+
   myFirstReactiveForm!: FormGroup<{
     email: FormControl<string | null >;
     password: FormControl<string | null>;
@@ -16,17 +18,17 @@ export class AuthPageComponent implements OnInit {
 
   private passwordValidator(control: FormControl): ValidationErrors | null {
     const value = control.value;
-    const hasNumber = /[0-9]/.test(value); // Проверка на содержание цифр
-    const hasSpecialCharacter = /[!@#$%^&*]/.test(value); // Проверка на содержание хотя бы одного спецсимвола
+    // const hasNumber = /[0-9]/.test(value); // Проверка на содержание цифр
+    // const hasSpecialCharacter = /[!@#$%^&*]/.test(value); // Проверка на содержание хотя бы одного спецсимвола
     const hasLowercaseLetter = /[a-z]/.test(value); // Проверка на содержание хотя бы одной латинской буквы в нижнем регистре
-    const hasCapitalLetter = /[A-Z]/.test(value); // Проверка на содержание хотя бы одной латинской буквы в верхнем регистре
+    //const hasCapitalLetter = /[A-Z]/.test(value); // Проверка на содержание хотя бы одной латинской буквы в верхнем регистре
     const isLengthValid = value ? value.length > 6 : false; // Проверка на минимальную длину пароля
    
     /** Общая проверка */
-    const passwordValid = hasNumber && hasSpecialCharacter && hasCapitalLetter && hasLowercaseLetter && isLengthValid;
+    const passwordValid = hasLowercaseLetter && isLengthValid;
   
     if (!passwordValid) {
-      return { invalidPassword: 'Пароль не прошел валидацию' };
+      return { invalidPassword: 'Пароль не прошел валидацию :(' };
     }
     return null;
   }
@@ -36,7 +38,7 @@ export class AuthPageComponent implements OnInit {
   initForm() {
 		this.myFirstReactiveForm = this.fb.group({
 		  email: ['', [Validators.required]],
-	    password: ['', [Validators.required]]
+	    password: ['', [Validators.required, this.passwordValidator]]
 	  });
 	}
 

@@ -19,11 +19,14 @@ export class MeetupCreatingComponent implements OnInit, OnDestroy {
   newMeetup!: IMeetup | undefined;
 
   @Output()
+public parentEvent = new EventEmitter();
+
+  @Output()
   public createEvent = new EventEmitter();
   
   meetupReactiveForm!: FormGroup<{
     name: FormControl<string | null | undefined>;
-    time: FormControl<string | null | undefined>;
+    time: FormControl<Date | null | undefined>;
     location: FormControl<string | null | undefined>;
     description: FormControl<string | null | undefined>;
     target_audience: FormControl<string | null | undefined>;
@@ -50,8 +53,6 @@ export class MeetupCreatingComponent implements OnInit, OnDestroy {
 
       this.initForm();
     this.meetupReactiveForm.valueChanges.subscribe();
-      // this.newMeetups.push(this.newMeetup);
-      // console.log(this.newMeetups);
     });
   }
   initForm() {

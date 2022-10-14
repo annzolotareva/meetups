@@ -63,7 +63,7 @@ export class MeetupsService{
     idMeetup: idMeetup,
     idUser: idUser
     };
-    return this.http.put('meetups', body); 
+    return this.http.put('/api/meetup', body); 
   } 
 
   public deleteSubscriber(idMeetup: number, idUser: number) {
@@ -80,7 +80,7 @@ export class MeetupsService{
 
   changeMeetup(id: number): void {
     console.log('hi');
-    this.router.navigate([`meetups/edit/${id}`]);
+    this.router.navigate([`meetup-creating/${id}`]);
   }
 
   createNewMeetup(newMeetup: IMeetup){     

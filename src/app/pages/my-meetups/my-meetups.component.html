@@ -1,4 +1,4 @@
-<button (click)="meetupsService.createMeetup()">Создать митап</button>
+<button mat-raised-button (click)="meetupsService.createMeetup()">Создать митап</button>
 <ul *ngFor="let meetup of myMeetups">
     <li>
         <app-meetup-card [newMeetup]="meetup"> </app-meetup-card>

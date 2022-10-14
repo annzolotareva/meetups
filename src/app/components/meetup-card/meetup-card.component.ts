@@ -16,6 +16,7 @@ export class MeetupCardComponent implements OnInit {
   isOpened: boolean = false;
   visible: boolean = false;
   isSubscriber: boolean = false;
+  subs!: string;
   
   constructor(public meetupsService: MeetupsService, private router: Router, public authService: AuthService) { }
   toggle(){
@@ -30,14 +31,30 @@ export class MeetupCardComponent implements OnInit {
   @Input()
     newMeetup!: IMeetup;
 
+
   subscr() {
     this.isSubscriber = !this.isSubscriber;
-    this.meetupsService.addSubscriber(this.newMeetup.id, this.authService.user.id)
+    this.meetupsService.getElems()
+    .subscribe((arg: any) => {
+      this.newMeetup = arg.filter((elem: IMeetup) => elem.users.forEach(obj => {
+        if (obj.id === this.authService.user.id) {
+          this.isSubscriber = !this.isSubscriber;
+        } else
+        {
+          this.meetupsService.addSubscriber(this.newMeetup.id, this.authService.user.id)
+          this.meetupsService.refresah();
+        }
+      }))
+      console.log(this.newMeetup)
+    });
+    //console.log(this.newMeetup.users.length);
   }
 
   unSubscr() {
     this.isSubscriber = !this.isSubscriber;
     this.meetupsService.addSubscriber(this.newMeetup.id, this.authService.user.id)
+    this.meetupsService.refresah();
+    //console.log(this.newMeetup.users.length);
   }
 
 
@@ -45,11 +62,15 @@ export class MeetupCardComponent implements OnInit {
     this.meetupsService.changeMeetup(this.newMeetup.id);
   }
 
+  sklonenie(number: number, txt: Array<string>) {
+    const cases = [2, 0, 1, 1, 1, 2];
+    return txt[(number % 100 > 4 && number % 100 < 20) ? 2 : cases[(number % 10 < 5) ? number % 10 : 5]];
+  }
+
   ngOnInit(): void {
-    
+    this.subs = this.sklonenie(this.newMeetup.users.length, ['подписчик', 'подписчика', 'подписчиков']);
   } 
 
-  
 }
 
   

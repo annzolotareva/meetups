@@ -1,4 +1,7 @@
 $defaulColor: #2C2C2C;
+$secondaryColor: #4C3F78;
+$accentColor: #B85526;
+
 .meetup-card {
     max-width: 1362px;
     min-height: 162px;
@@ -10,6 +13,16 @@ mat-expansion-panel-header{
     min-height: 162px;
 }
 
+mat-content{
+    display: block;
+}
+
+.meetup-card__header{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
 .mat-expansion-panel {
     background: #2C2C2C; 
     color: #FFFFFF;
@@ -19,4 +32,57 @@ h3 {
 }
 h4 {
     font-size: 20px;
+}
+
+.meetup-card__name{
+    padding: 14px;
+}
+
+.meetup-owner{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    max-width: 200px;
+    width: 100%;
+}
+
+.meetup-owner__img{ 
+    max-width: 25px;
+    width: 100%;
+    margin-right: 10px;
+}
+
+.meetup-card__time-location {
+    display: block;
+    max-width: 200px;
+    text-align: left;
+}
+
+.meetup-card__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.meetup-card__btn {
+    max-width: 160px;
+    width: 100%;
+}
+.meetup-card__btn_subscr {
+    color: #FFFFFF;
+    background: $secondaryColor;
+    margin: 8px;
+}
+
+.meetup-card__btn_unsubscr {
+    color: $secondaryColor;
+    background: #B4B4C0;
+}
+
+.meetup-card__btn_edit {
+    color: #FFFFFF;
+    background: $accentColor;
+}
+
+.meetup-card__btns {
+ text-align: center;   
 }

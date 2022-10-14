@@ -1,10 +1,8 @@
 <form [formGroup]="meetupReactiveForm">
     <p class="field-header">Название</p>
     <input type="text" id="name" formControlName="name"/>
-    <!-- <p class="field-header">Дата</p>
-    <input type="date" id="date" formControlName="date"/> -->
-    <p class="field-header">Время</p>
-    <input type="time" id="time" formControlName="time">
+    <p class="field-header">Дата и время</p>
+    <input type="datetime-local" id="time" formControlName="time">
     <p class="field-header">Место</p>
     <input type="text" id="location" formControlName="location">
     <p class="field-header">Описание</p>                                                  
@@ -15,8 +13,8 @@
     <input type="text" id="need_to_know" formControlName="need_to_know">
     <p class="field-header">Что будет</p>
     <input type="text" id="will_happen" formControlName="will_happen">
-    <p class="field-header">Почему надо обызательно прийти</p>
+    <p class="field-header">Почему надо обязательно прийти</p>
     <input type="text" id="reason_to_come" formControlName="reason_to_come">
-    <button class="meetups-button button-cancel" (click)="cancelEditForm()">Отмена</button>
-    <button class="meetups-button button-save" type="button" (click)="onSubmit()" >Сохранить</button>
+    <button mat-raised-button class="meetups-button button-cancel" (click)="cancelEditForm()">Отмена</button>
+    <button mat-raised-button class="meetups-button button-save" type="button" (click)="onSubmit()" (click)="parentEvent.emit(newMeetup?.id)" >Сохранить</button>
   </form>

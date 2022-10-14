@@ -10,14 +10,23 @@ import { AuthService } from '../../services/auth.service'
 })
 
 export class HeaderComponent implements OnInit {
-  admin: boolean = true;
+  constructor(public authService: AuthService) {}
+
+  admin: boolean = this.authService.isAdmin;
   navLinks = [
     {location:'/meetups', label:'Митапы'},
     { location: '/my-meetups', label:'Мои митапы'},
     { location: '/users', label:'Пользователи'}
   ];
-  constructor(public authService: AuthService) {}
+
+  notAdminNavLinks = [
+    {location:'/meetups', label:'Митапы'},
+    { location: '/my-meetups', label:'Мои митапы'},
+  ]
+  
   
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.admin)
+  }
 }
