@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, distinctUntilChanged, filter, ignoreElements, mergeMap, Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { UsersService } from "./users.service";
 import { IMeetup } from "../entities/meetup/meetup.component"
 import { AuthService } from './auth.service';
@@ -14,6 +14,7 @@ export class MeetupsService{
   meetups$: Observable<Array<IMeetup>> = this.http.get<Array<IMeetup>>('/api/meetup');
   subject$ = new BehaviorSubject<IMeetup[]>([]);
   newMeetup!: Array<IMeetup>;
+  newMetp!: IMeetup;
   
   
   deepEqual = (a: any, b: any) => {
@@ -67,20 +68,28 @@ export class MeetupsService{
   } 
 
   public deleteSubscriber(idMeetup: number, idUser: number) {
-    const body = {
-      idMeetup: idMeetup,
-      idUser: idUser
-    }
-   // return this.http.delete('meetups', body); 
+   return this.http.delete('/api/meetup',  {body: {idMeetup, idUser}})
   }
 
   createMeetup(): void {
     location.replace('creating');
   }
 
-  changeMeetup(id: number): void {
-    console.log('hi');
-    this.router.navigate([`meetup-creating/${id}`]);
+  changeMeetup(newId: number, newMeetup: IMeetup | undefined){
+    console.log(newMeetup)
+    const body = {
+      name: newMeetup?.name, 
+      description: newMeetup?.description,
+      time: newMeetup?.time,
+      duration: 90, 
+      lacation: newMeetup?.location,
+      target_audience: newMeetup?.target_audience,
+      need_to_know: newMeetup?.need_to_know,
+      will_happen: newMeetup?.will_happen,
+      reason_to_come: newMeetup?.reason_to_come
+    };
+    // this.router.navigate([`meetup-creating/${newId}`]);
+    return this.http.put(`/api/meetup/${newId}`, body)
   }
 
   createNewMeetup(newMeetup: IMeetup){     
@@ -97,6 +106,10 @@ export class MeetupsService{
     };
     return this.http.post('/api/meetup', body);
 }
+
+public deleteMeetup(idMeetup: number) {
+  return this.http.delete(`/api/meetup/${idMeetup}`)
+ }
 
 cancel() {
   this.router.navigate(['my-meetups']);

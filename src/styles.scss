@@ -1,5 +1,5 @@
 /*Обнуление*/
-*{padding: 0;margin: 0;border: 0;}
+*{border: 0;}
 *,*:before,*:after{-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;}
 :focus,:active{outline: none;}
 a:focus,a:active{outline: none;}
@@ -92,18 +92,15 @@ input:-internal-autofill-selected {
   text-align: left;
 }
 
-mat-expansion-panel-header{
-  min-height: 162px;
-}
 
-mat-content{
-  display: block;
-}
+// mat-content{
+//   display: block;
+// }
 
 .meetup-card__header{
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
+  // display: flex;
+  // justify-content: flex-start;
+  // align-items: center;
 }
 
 .mat-expansion-panel {
@@ -172,9 +169,14 @@ text-align: center;
 
 ul {
   list-style: none;
-  display: flex;
   max-width: 1362px;
   width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 
+.header-wrap, .mat-tab-links {
+  max-height: 120px;
+  height: 100%;
+}

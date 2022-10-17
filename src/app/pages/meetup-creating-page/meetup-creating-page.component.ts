@@ -13,9 +13,9 @@ export class MeetupCreatingPageComponent implements OnInit {
 
   constructor(private meetupsService: MeetupsService) { }
 
-  create(newValue: IMeetup){
-    this.meetupsService.createNewMeetup(newValue);
-  }
+  // create(newValue: IMeetup){
+  //   this.meetupsService.createNewMeetup(newValue);
+  // }
 
   ngOnInit(): void {
     

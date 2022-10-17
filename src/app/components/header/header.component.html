@@ -3,7 +3,7 @@
         <nav mat-tab-nav-bar mat-align-tabs="center" mat-stretch-tabs>
             <h1>MeetUps</h1>
             <div class="for-admin" *ngIf="admin">
-                <a mat-tab-link *ngFor="let link of navLinks"
+            <a mat-tab-link *ngFor="let link of navLinks"
             routerLink="{{ link.location }}"
             routerLinkActive
             #rla="routerLinkActive"

@@ -9,6 +9,7 @@ import { AuthService } from './auth.service';
 export class UsersService {
 users$: Observable<Array<IUser>> = this.http.get<Array<IUser>>('/api/user');
 subject$ = new BehaviorSubject<IUser[]>([]);
+newUser!: IUser;
 
 deepEqual = (a: any, b: any) => {
   if (a === b) {
@@ -50,7 +51,16 @@ getElems(){
   )
 }
 
-  delete(id: number): void{
+changeUser(userId: number){
+    const body = {
+      email: this.newUser.email,
+      password: this.newUser.password,
+      fio: this.newUser.fio
+    };
+    return this.http.put(`/api/user/${userId}`, body)
+  }
+
+  deleteUser(id: number): void{
 
   }
 }

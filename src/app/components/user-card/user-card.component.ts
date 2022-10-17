@@ -15,4 +15,8 @@ ngOnInit(): void {
 
   constructor(public usersService: UsersService) { }
 
+  change() {
+    this.usersService.changeUser(this.newUserCard.id)
+  }
+
 }

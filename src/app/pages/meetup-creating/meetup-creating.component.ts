@@ -11,8 +11,10 @@ import { MeetupsService } from 'src/app/services/meetups.service';
   templateUrl: './meetup-creating.component.html',
   styleUrls: ['./meetup-creating.component.scss']
 })
-export class MeetupCreatingComponent implements OnInit, OnDestroy {
+export class MeetupCreatingComponent implements OnInit {
   subscription!: Subscription;
+
+  from: any;
 
   newObj!: any;
   meetupId!: number;
@@ -20,9 +22,8 @@ export class MeetupCreatingComponent implements OnInit, OnDestroy {
 
   @Output()
 public parentEvent = new EventEmitter();
-
-  @Output()
-  public createEvent = new EventEmitter();
+@Output()
+public createEvent = new EventEmitter();
   
   meetupReactiveForm!: FormGroup<{
     name: FormControl<string | null | undefined>;
@@ -39,24 +40,24 @@ public parentEvent = new EventEmitter();
   constructor(private meetupsService: MeetupsService, private fb: FormBuilder, private router: Router) {}
 
   ngOnInit(): void {
-    const from = this.router.url.lastIndexOf('/');
-    let meetupId = Number(this.router.url.slice(from + 1));
+    this.from = this.router.url.lastIndexOf('/');
+  this.meetupId = Number(this.router.url.slice(this.from + 1));
+    this.initForm();
+    this.meetupReactiveForm.valueChanges.subscribe();
     
+
+  
+  }
+  initForm() {
     this.subscription = this.meetupsService.getElems()
     .pipe(
       take(1)
     )
     .subscribe((arg: IMeetup[]) => {
       
-      this.newMeetup = arg.find(elem => elem.id === meetupId)  
+      this.newMeetup = arg.find(elem => elem.id === this.meetupId)  
       console.log(this.newMeetup);
-
-      this.initForm();
-    this.meetupReactiveForm.valueChanges.subscribe();
-    });
-  }
-  initForm() {
-		this.meetupReactiveForm = this.fb.group({
+      	this.meetupReactiveForm = this.fb.group({
 		  name: [ this.newMeetup?.name, [Validators.required]],
 	    time: [this.newMeetup?.time, [Validators.required]],
       location: [this.newMeetup?.location, [Validators.required]],
@@ -66,13 +67,11 @@ public parentEvent = new EventEmitter();
       will_happen: [this.newMeetup?.will_happen, [Validators.required]],
       reason_to_come: [this.newMeetup?.reason_to_come, [Validators.required]]
 	  });
+    });
+	
 	}
 
-  
-  
-   ngOnDestroy() {
-    this.subscription.unsubscribe()
-}
+
 
   onSubmit() {
     if (this.meetupReactiveForm.invalid) {
@@ -89,10 +88,10 @@ public parentEvent = new EventEmitter();
       will_happen: this.meetupReactiveForm.value.will_happen,
       reason_to_come: this.meetupReactiveForm.value.reason_to_come
     }
-    // this.createEvent.emit(this.newObj);
+
+    //this.createEvent.emit(this.newObj);
     this.meetupsService.createNewMeetup(this.newObj).subscribe();
     this.meetupsService.refresah();
-    //console.log(this.nMeetups); 
     this.router.navigate(['my-meetups']);
     
   }

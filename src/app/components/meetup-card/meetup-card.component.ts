@@ -34,32 +34,18 @@ export class MeetupCardComponent implements OnInit {
 
   subscr() {
     this.isSubscriber = !this.isSubscriber;
-    this.meetupsService.getElems()
-    .subscribe((arg: any) => {
-      this.newMeetup = arg.filter((elem: IMeetup) => elem.users.forEach(obj => {
-        if (obj.id === this.authService.user.id) {
-          this.isSubscriber = !this.isSubscriber;
-        } else
-        {
-          this.meetupsService.addSubscriber(this.newMeetup.id, this.authService.user.id)
-          this.meetupsService.refresah();
-        }
-      }))
-      console.log(this.newMeetup)
-    });
-    //console.log(this.newMeetup.users.length);
+          this.meetupsService.addSubscriber(this.newMeetup.id, this.authService.user.id).subscribe(() => this.meetupsService.refresah());
   }
 
   unSubscr() {
     this.isSubscriber = !this.isSubscriber;
-    this.meetupsService.addSubscriber(this.newMeetup.id, this.authService.user.id)
-    this.meetupsService.refresah();
-    //console.log(this.newMeetup.users.length);
+    this.meetupsService.deleteSubscriber(this.newMeetup.id, this.authService.user.id).subscribe(() => this.meetupsService.refresah());
   }
 
 
   change(): void {
-    this.meetupsService.changeMeetup(this.newMeetup.id);
+    this.router.navigate([`meetups/edit/${this.newMeetup.id}`]);
+    
   }
 
   sklonenie(number: number, txt: Array<string>) {
@@ -69,6 +55,7 @@ export class MeetupCardComponent implements OnInit {
 
   ngOnInit(): void {
     this.subs = this.sklonenie(this.newMeetup.users.length, ['подписчик', 'подписчика', 'подписчиков']);
+    console.log(this.newMeetup)
   } 
 
 }
