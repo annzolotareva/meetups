@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy } from '@angular/compiler';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription, take } from 'rxjs';
 import { IMeetup } from 'src/app/entities/meetup/meetup.component';
 import { AuthService } from 'src/app/services/auth.service';
 import { MeetupsService } from 'src/app/services/meetups.service';
@@ -12,11 +13,15 @@ import { MeetupEditingPageComponent } from '../../pages/meetup-editing-page/meet
   styleUrls: ['./meetup-card.component.scss']
 })
 export class MeetupCardComponent implements OnInit {
+  @Output()
+public createEvent = new EventEmitter();
   panelOpenState = false;
   isOpened: boolean = false;
   visible: boolean = false;
   isSubscriber: boolean = false;
   subs!: string;
+  subscription!: Subscription;
+  
   
   constructor(public meetupsService: MeetupsService, private router: Router, public authService: AuthService) { }
   toggle(){
@@ -44,6 +49,7 @@ export class MeetupCardComponent implements OnInit {
 
 
   change(): void {
+    this.createEvent.emit(this.newMeetup);
     this.router.navigate([`meetups/edit/${this.newMeetup.id}`]);
     
   }
@@ -55,8 +61,23 @@ export class MeetupCardComponent implements OnInit {
 
   ngOnInit(): void {
     this.subs = this.sklonenie(this.newMeetup.users.length, ['подписчик', 'подписчика', 'подписчиков']);
-    console.log(this.newMeetup)
   } 
+
+  // isOwner() {
+  //   this.subscription = this.meetupsService.getElems()
+  //   .pipe(
+  //     take(1)
+  //   )
+  //   .subscribe((arg: IMeetup[]) => {
+  //     if (this.authService.user.id ===) {
+
+  //     }
+      
+  //     this.newMeetup = arg.find(elem => elem.id === this.meetupId)  
+  //     console.log(this.newMeetup);
+  //   });
+  //   if (this.authService.user.id === )
+  // }
 
 }
 

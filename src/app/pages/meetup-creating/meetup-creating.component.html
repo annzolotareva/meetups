@@ -16,5 +16,8 @@
     <p class="field-header">Почему надо обязательно прийти</p>
     <input type="text" id="reason_to_come" formControlName="reason_to_come">
     <button mat-raised-button class="meetups-button button-cancel" (click)="cancelEditForm()">Отмена</button>
-    <button mat-raised-button class="meetups-button button-save" type="button" (click)="onSubmit()" (click)="parentEvent.emit(newMeetup?.id)" >Сохранить</button>
+    <button mat-raised-button class="meetups-button button-save" type="button" (click)="onSubmit()">Сохранить</button>
   </form>
+
+
+  <!-- (click)="parentEvent.emit(newMeetup?.id)" -->

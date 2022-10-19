@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, distinctUntilChanged, filter, ignoreElements, mergeMap, Observable } from 'rxjs';
+import { BehaviorSubject, distinctUntilChanged, filter, ignoreElements, mergeMap, Observable, take } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { UsersService } from "./users.service";
 import { IMeetup } from "../entities/meetup/meetup.component"
@@ -75,21 +75,21 @@ export class MeetupsService{
     location.replace('creating');
   }
 
-  changeMeetup(newId: number, newMeetup: IMeetup | undefined){
-    console.log(newMeetup)
-    const body = {
-      name: newMeetup?.name, 
-      description: newMeetup?.description,
-      time: newMeetup?.time,
-      duration: 90, 
-      lacation: newMeetup?.location,
-      target_audience: newMeetup?.target_audience,
-      need_to_know: newMeetup?.need_to_know,
-      will_happen: newMeetup?.will_happen,
-      reason_to_come: newMeetup?.reason_to_come
-    };
-    // this.router.navigate([`meetup-creating/${newId}`]);
-    return this.http.put(`/api/meetup/${newId}`, body)
+  changeMeetup(newMeetup: any){
+    const from = this.router.url.lastIndexOf('/');
+    let newId = Number(this.router.url.slice(from + 1));
+    this.getElems()
+    .pipe(
+      take(1)
+    )
+    .subscribe((arg: IMeetup[]) => {
+      
+      newMeetup = arg.find(elem => elem.id === newId)  
+      console.log(newMeetup);
+  })}
+
+  saveChangeMeetup(newMeetup: any) {
+
   }
 
   createNewMeetup(newMeetup: IMeetup){     
@@ -97,7 +97,7 @@ export class MeetupsService{
       name: newMeetup.name, 
       description: newMeetup.description,
       time: newMeetup.time,
-      lacation: newMeetup.location,
+      location: newMeetup.location,
       duration: 90, 
       target_audience: newMeetup.target_audience,
       need_to_know: newMeetup.need_to_know,

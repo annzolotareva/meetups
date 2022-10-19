@@ -19,4 +19,8 @@ ngOnInit(): void {
     this.usersService.changeUser(this.newUserCard.id)
   }
 
+  delete() {
+    this.usersService.deleteUser(this.newUserCard.id)
+  }
+
 }

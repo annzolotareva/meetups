@@ -10,12 +10,13 @@ import { MeetupCreatingComponent } from "../meetup-creating/meetup-creating.comp
   styleUrls: ['./meetup-creating-page.component.scss']
 })
 export class MeetupCreatingPageComponent implements OnInit {
+  newElem!: IMeetup;
 
   constructor(private meetupsService: MeetupsService) { }
 
-  // create(newValue: IMeetup){
-  //   this.meetupsService.createNewMeetup(newValue);
-  // }
+  create(newValue: any){
+    this.meetupsService.createNewMeetup(newValue).subscribe(() => this.meetupsService.refresah());
+  }
 
   ngOnInit(): void {
     
